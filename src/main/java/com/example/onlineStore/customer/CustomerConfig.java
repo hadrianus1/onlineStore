@@ -1,10 +1,13 @@
 package com.example.onlineStore.customer;
 
+import com.example.onlineStore.inventory.Inventory;
+import com.example.onlineStore.inventory.InventoryRepositoryDAO;
 import com.example.onlineStore.product.Product;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +16,8 @@ import java.util.List;
 public class CustomerConfig {
 
     @Bean
-    CommandLineRunner customerCommandLineRunner(CustomerRepositoryDAO customerRepository) {
+    @Transactional
+    CommandLineRunner customerCommandLineRunner(CustomerRepositoryDAO customerRepository, InventoryRepositoryDAO inventoryRepository) {
         return args -> {
             Product product1 = new Product(
                     "laptop",
@@ -68,6 +72,25 @@ public class CustomerConfig {
                     mariaProductList
             );
             customerRepository.saveAll(new ArrayList<Customer>(Arrays.asList(vasile, maria)));
+
+
+            Inventory inventory1 = new Inventory(
+                    "laptop",
+                    20,
+                    6000.0f);
+            Inventory inventory2 = new Inventory(
+                    "tv",
+                    25,
+                    4000.50f);
+            Inventory inventory3 = new Inventory(
+                    "mouse",
+                    30,
+                    99f);
+            Inventory inventory4 = new Inventory(
+                    "clothes",
+                    200,
+                    2000.75f);
+            inventoryRepository.saveAll(new ArrayList<Inventory>(Arrays.asList(inventory1, inventory2, inventory3, inventory4)));
         };
     }
 }

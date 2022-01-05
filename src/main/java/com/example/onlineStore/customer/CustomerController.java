@@ -24,12 +24,12 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @GetMapping
+    @GetMapping(path = "getCommand")
     public List<Customer> getAllCustomers(){
         return customerService.getAllCustomers();
     }
 
-    @PostMapping
+    @PostMapping(path = "orderCommand")
     public void addCustomer(@RequestBody Customer customer) {
         customerService.addCustomer(customer);
     }
@@ -44,7 +44,7 @@ public class CustomerController {
         customerService.updateCustomer(customerId, address, password, phoneNumber, email, productList);
     }
 
-    @DeleteMapping(path = "{customerId}")
+    @DeleteMapping(path = "deleteCommand/{customerId}")
     public void deleteCustomer(@PathVariable("customerId") Long customerId) {
         customerService.deleteCustomer(customerId);
     }
