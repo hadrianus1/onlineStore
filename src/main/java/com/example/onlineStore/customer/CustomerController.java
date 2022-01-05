@@ -24,7 +24,7 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @GetMapping(path = "getCommand")
+    @GetMapping(path = "getAllCommands")
     public List<Customer> getAllCustomers(){
         return customerService.getAllCustomers();
     }
@@ -34,7 +34,7 @@ public class CustomerController {
         customerService.addCustomer(customer);
     }
 
-    @PutMapping(path = "{customerId}")
+    @PutMapping(path = "updateCommand/{customerId}")
     public void updateCustomer(@PathVariable("customerId") Long customerId,
                                @RequestParam(required = false) String address,
                                @RequestParam(required = false) String password,
