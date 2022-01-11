@@ -102,7 +102,7 @@ public class CustomerService {
             productList.stream().forEach(x -> {
                 Optional<Inventory> inventoryOptional = inventoryRepository.findProductByProductName(x.getProductName());
                 if (!inventoryOptional.isPresent()) {
-                    throw new ObjectNotFoundException("Product named " + x.getProductName() + "does not exist in the inventory!");
+                    throw new ObjectNotFoundException("Product named " + x.getProductName() + " does not exist in the inventory!");
                 } else {
                     if ("add".equals(operation)) {
                         inventoryOptional.get().setQuantity(inventoryOptional.get().getQuantity() + x.getQuantity());

@@ -11,11 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.util.List;
+import java.util.Objects;
 
 @Entity(name = "Customer")
 @Table(
@@ -180,5 +180,18 @@ public class Customer {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", productList=" + productList +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return Objects.equals(username, customer.username) && Objects.equals(password, customer.password) && Objects.equals(email, customer.email) && Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName) && Objects.equals(address, customer.address) && Objects.equals(phoneNumber, customer.phoneNumber) && Objects.equals(productList, customer.productList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, password, email, firstName, lastName, address, phoneNumber, productList);
     }
 }
